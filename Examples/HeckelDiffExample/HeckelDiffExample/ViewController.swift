@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     let last = items.removeLast()
     items.insert(last, at: 0)
 
-    tableView.applyDiff(previousItems, items, inSection: 0, withAnimation: .right)
+    tableView.applyDiff(previousItems, items, inSection: 0, withInsertAnimation: .bottom, withDeleteAnimation: .top, withReloadAnimation: .none)
 
     let time = DispatchTime.now() + DispatchTimeInterval.seconds(1)
     DispatchQueue.main.asyncAfter(deadline: time) {
