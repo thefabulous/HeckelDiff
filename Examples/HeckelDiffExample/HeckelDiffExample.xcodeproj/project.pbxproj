@@ -108,7 +108,7 @@
 				TargetAttributes = {
 					D869F5D11DE622CD00CDAFAF = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 46UKZ786J3;
+						DevelopmentTeam = DPE4LURAUZ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -273,7 +273,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 46UKZ786J3;
+				DEVELOPMENT_TEAM = DPE4LURAUZ;
 				INFOPLIST_FILE = HeckelDiffExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.matiascudich.HeckelDiffExample;
@@ -286,7 +286,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 46UKZ786J3;
+				DEVELOPMENT_TEAM = DPE4LURAUZ;
 				INFOPLIST_FILE = HeckelDiffExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.matiascudich.HeckelDiffExample;
@@ -314,6 +314,7 @@
 				D869F5E61DE622CD00CDAFAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
