@@ -18,7 +18,7 @@ public extension UITableView {
     /// - parameter insertAnimation: The animation type for insertion.
     /// - parameter deleteAnimation: The animation type for deletion.
     /// - parameter reloadAnimation: The animation type for reload.
-    func applyDiff<T: Collection>(_ old: T, _ new: T, inSection section: Int, withInsertAnimation insertAnimation: UITableViewRowAnimation, withDeleteAnimation deleteAnimation: UITableViewRowAnimation, withReloadAnimation reloadAnimation: UITableViewRowAnimation, completion: (() -> Void)? = nil) where T.Iterator.Element: Hashable, T.IndexDistance == Int, T.Index == Int {
+    func applyDiff<T: Collection>(_ old: T, _ new: T, inSection section: Int, withInsertAnimation insertAnimation: UITableViewRowAnimation, withDeleteAnimation deleteAnimation: UITableViewRowAnimation, withReloadAnimation reloadAnimation: UITableViewRowAnimation, completion: @escaping () -> Void) where T.Iterator.Element: Hashable, T.IndexDistance == Int, T.Index == Int {
         let update = ListUpdate(diff(old, new), section)
         let cellsToDelete = update.deletions.enumerated().map { (index, element) in cellForRow(at: element) }
         
