@@ -20,8 +20,7 @@ public extension UITableView {
     /// - parameter reloadAnimation: The animation type for reload.
     func applyDiff<T: Collection>(_ old: T, _ new: T, inSection section: Int, withInsertAnimation insertAnimation: UITableViewRowAnimation, withDeleteAnimation deleteAnimation: UITableViewRowAnimation, withReloadAnimation reloadAnimation: UITableViewRowAnimation, completion: @escaping () -> Void) where T.Iterator.Element: Hashable, T.IndexDistance == Int, T.Index == Int {
         let update = ListUpdate(diff(old, new), section)
-        let cellsToDelete = update.deletions.enumerated().map { (index, element) in cellForRow(at: element) }
-        
+
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         
@@ -32,8 +31,6 @@ public extension UITableView {
             moveRow(at: move.from, to: move.to)
         }
         endUpdates()
-        
-        cellsToDelete.forEach { cell in UIView.animate(withDuration: 0.3) { cell?.alpha = 0.0 } }
         
         // reloadItems is done separately as the update indexes returne by diff() are in respect to the
         // "after" state, but the collectionView.reloadItems() call wants the "before" indexPaths.
