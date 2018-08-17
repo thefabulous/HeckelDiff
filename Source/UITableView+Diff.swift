@@ -14,6 +14,17 @@ public struct DiffAnimation {
     let deleteAnimation: UITableViewRowAnimation
     let reloadAnimation: UITableViewRowAnimation
     let disabledReloadAnimationIndexPaths: [IndexPath]
+
+    public init(insertAnimation: UITableViewRowAnimation,
+                deleteAnimation: UITableViewRowAnimation,
+                reloadAnimation: UITableViewRowAnimation,
+                disabledReloadAnimationIndexPaths: [IndexPath]) {
+
+        self.insertAnimation = insertAnimation
+        self.deleteAnimation = deleteAnimation
+        self.reloadAnimation = reloadAnimation
+        self.disabledReloadAnimationIndexPaths = disabledReloadAnimationIndexPaths
+    }
 }
 
 public extension UITableView {
