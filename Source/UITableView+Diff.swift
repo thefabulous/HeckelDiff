@@ -9,22 +9,25 @@
 import Foundation
 import UIKit
 
+public struct DiffAnimation {
+    let insertAnimation: UITableViewRowAnimation
+    let deleteAnimation: UITableViewRowAnimation
+    let reloadAnimation: UITableViewRowAnimation
+    let disabledReloadAnimationIndexPaths: [IndexPath]
+}
+
 public extension UITableView {
     /// Applies a batch update to the receiver, efficiently reporting changes between old and new.
     ///
     /// - parameter old:       The previous state of the table view.
     /// - parameter new:       The current state of the table view.
     /// - parameter section:   The section where these changes took place.
-    /// - parameter insertAnimation: The animation type for insertion.
-    /// - parameter deleteAnimation: The animation type for deletion.
-    /// - parameter reloadAnimation: The animation type for reload.
+    /// - parameter diffAnimation: The animation config for updating content.
     func applyDiff<T: Collection>(_ old: T, _ new: T, inSection section: Int,
-                                  withInsertAnimation insertAnimation: UITableViewRowAnimation,
-                                  withDeleteAnimation deleteAnimation: UITableViewRowAnimation,
-                                  withReloadAnimation reloadAnimation: UITableViewRowAnimation,
+                                  withDiffAnimation diffAnimation: DiffAnimation,
                                   reloadVisible: Bool = false,
                                   completion: @escaping () -> Void)
-        where T.Iterator.Element: Hashable, T.IndexDistance == Int, T.Index == Int {
+        where T.Iterator.Element: Hashable, T.Index == Int {
 
             let update = ListUpdate(diff(old, new), section)
 
@@ -32,8 +35,8 @@ public extension UITableView {
             CATransaction.setCompletionBlock(completion)
 
             beginUpdates()
-            deleteRows(at: update.deletions, with: deleteAnimation)
-            insertRows(at: update.insertions, with: insertAnimation)
+            deleteRows(at: update.deletions, with: diffAnimation.deleteAnimation)
+            insertRows(at: update.insertions, with: diffAnimation.insertAnimation)
             for move in update.moves {
                 moveRow(at: move.from, to: move.to)
             }
@@ -46,8 +49,11 @@ public extension UITableView {
                 if reloadVisible {
                     rows += (indexPathsForVisibleRows ?? [])
                 }
+                let rowsWithAnimation = rows.filter { !diffAnimation.disabledReloadAnimationIndexPaths.contains($0) }
+                let rowsWithoutAnimation = rows.filter { diffAnimation.disabledReloadAnimationIndexPaths.contains($0) }
                 beginUpdates()
-                reloadRows(at: rows, with: reloadAnimation)
+                reloadRows(at: rowsWithAnimation, with: diffAnimation.reloadAnimation)
+                reloadRows(at: rowsWithoutAnimation, with: .none)
                 endUpdates()
             }
 
