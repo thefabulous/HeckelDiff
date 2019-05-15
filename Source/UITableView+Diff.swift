@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 
 public struct DiffAnimation {
-    let insertAnimation: UITableViewRowAnimation
-    let deleteAnimation: UITableViewRowAnimation
-    let reloadAnimation: UITableViewRowAnimation
+    let insertAnimation: UITableView.RowAnimation
+    let deleteAnimation: UITableView.RowAnimation
+    let reloadAnimation: UITableView.RowAnimation
     let disabledReloadAnimationIndexPaths: [IndexPath]
 
-    public init(insertAnimation: UITableViewRowAnimation,
-                deleteAnimation: UITableViewRowAnimation,
-                reloadAnimation: UITableViewRowAnimation,
+    public init(insertAnimation: UITableView.RowAnimation,
+                deleteAnimation: UITableView.RowAnimation,
+                reloadAnimation: UITableView.RowAnimation,
                 disabledReloadAnimationIndexPaths: [IndexPath]) {
 
         self.insertAnimation = insertAnimation
